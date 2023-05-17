@@ -23,6 +23,12 @@
 		822EE0792A156A5500172D0A /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 822EE0702A156A5500172D0A /* Inter-Regular.ttf */; };
 		822EE07E2A156E6500172D0A /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE07D2A156E6500172D0A /* AppLabel.swift */; };
 		822EE0802A156ED100172D0A /* AppTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE07F2A156ED100172D0A /* AppTextfield.swift */; };
+		822EE0822A1577C900172D0A /* BaseTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE0812A1577C900172D0A /* BaseTabBarViewController.swift */; };
+		822EE0842A1577F000172D0A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE0832A1577F000172D0A /* BaseViewController.swift */; };
+		822EE0862A1578F400172D0A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE0852A1578F400172D0A /* HomeViewController.swift */; };
+		822EE0882A15791600172D0A /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE0872A15791600172D0A /* ChatViewController.swift */; };
+		822EE08A2A15792900172D0A /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE0892A15792900172D0A /* CameraViewController.swift */; };
+		822EE08C2A15793F00172D0A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE08B2A15793F00172D0A /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +50,12 @@
 		822EE0702A156A5500172D0A /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		822EE07D2A156E6500172D0A /* AppLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLabel.swift; sourceTree = "<group>"; };
 		822EE07F2A156ED100172D0A /* AppTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextfield.swift; sourceTree = "<group>"; };
+		822EE0812A1577C900172D0A /* BaseTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarViewController.swift; sourceTree = "<group>"; };
+		822EE0832A1577F000172D0A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		822EE0852A1578F400172D0A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		822EE0872A15791600172D0A /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		822EE0892A15792900172D0A /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		822EE08B2A15793F00172D0A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +114,7 @@
 				822EE0612A15687000172D0A /* AppButton.swift */,
 				822EE07D2A156E6500172D0A /* AppLabel.swift */,
 				822EE07F2A156ED100172D0A /* AppTextfield.swift */,
+				822EE0832A1577F000172D0A /* BaseViewController.swift */,
 			);
 			path = Reusables;
 			sourceTree = "<group>";
@@ -132,6 +145,11 @@
 			children = (
 				822EE07C2A156D6900172D0A /* Storyboards */,
 				822EE04F2A15670000172D0A /* LoginViewController.swift */,
+				822EE0812A1577C900172D0A /* BaseTabBarViewController.swift */,
+				822EE0852A1578F400172D0A /* HomeViewController.swift */,
+				822EE0872A15791600172D0A /* ChatViewController.swift */,
+				822EE0892A15792900172D0A /* CameraViewController.swift */,
+				822EE08B2A15793F00172D0A /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -225,10 +243,16 @@
 				822EE0502A15670000172D0A /* LoginViewController.swift in Sources */,
 				822EE04C2A15670000172D0A /* AppDelegate.swift in Sources */,
 				822EE07E2A156E6500172D0A /* AppLabel.swift in Sources */,
+				822EE08A2A15792900172D0A /* CameraViewController.swift in Sources */,
 				822EE0672A15690000172D0A /* UIColor + Extension.swift in Sources */,
+				822EE0842A1577F000172D0A /* BaseViewController.swift in Sources */,
 				822EE04E2A15670000172D0A /* SceneDelegate.swift in Sources */,
+				822EE0862A1578F400172D0A /* HomeViewController.swift in Sources */,
+				822EE08C2A15793F00172D0A /* SettingsViewController.swift in Sources */,
 				822EE0622A15687000172D0A /* AppButton.swift in Sources */,
 				822EE0802A156ED100172D0A /* AppTextfield.swift in Sources */,
+				822EE0882A15791600172D0A /* ChatViewController.swift in Sources */,
+				822EE0822A1577C900172D0A /* BaseTabBarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

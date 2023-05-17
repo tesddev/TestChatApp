@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
     
     var loginLabel: AppLabel = {
         let label = AppLabel()
@@ -45,9 +45,7 @@ class LoginViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        navigationController?.setNavigationBarHidden(true, animated: true)
         super.viewDidLoad()
-        view.backgroundColor = .white
         activateConstraint()
     }
     
@@ -83,5 +81,8 @@ class LoginViewController: UIViewController {
     
     @objc func didTapLoginButton(){
         print("pressed")
+        let vc = BaseTabBarViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
 }
