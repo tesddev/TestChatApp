@@ -29,6 +29,13 @@
 		822EE0882A15791600172D0A /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE0872A15791600172D0A /* ChatViewController.swift */; };
 		822EE08A2A15792900172D0A /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE0892A15792900172D0A /* CameraViewController.swift */; };
 		822EE08C2A15793F00172D0A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE08B2A15793F00172D0A /* SettingsViewController.swift */; };
+		822EE08F2A15844D00172D0A /* NewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE08E2A15844D00172D0A /* NewChatViewController.swift */; };
+		822EE0912A15873300172D0A /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE0902A15873300172D0A /* UIViewController + Extension.swift */; };
+		822EE0942A1590F600172D0A /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 822EE0932A1590F600172D0A /* IQKeyboardManagerSwift */; };
+		822EE0962A15953300172D0A /* MessagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE0952A15953300172D0A /* MessagingViewController.swift */; };
+		822EE0A62A18238B00172D0A /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE0A52A18238B00172D0A /* AvatarImageView.swift */; };
+		822EE0A92A18299000172D0A /* ChatsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE0A82A18299000172D0A /* ChatsTableViewCell.swift */; };
+		822EE0AB2A182FAD00172D0A /* UITabBar + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EE0AA2A182FAD00172D0A /* UITabBar + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +63,12 @@
 		822EE0872A15791600172D0A /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		822EE0892A15792900172D0A /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		822EE08B2A15793F00172D0A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		822EE08E2A15844D00172D0A /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
+		822EE0902A15873300172D0A /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
+		822EE0952A15953300172D0A /* MessagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingViewController.swift; sourceTree = "<group>"; };
+		822EE0A52A18238B00172D0A /* AvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
+		822EE0A82A18299000172D0A /* ChatsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTableViewCell.swift; sourceTree = "<group>"; };
+		822EE0AA2A182FAD00172D0A /* UITabBar + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				822EE0942A1590F600172D0A /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +129,7 @@
 				822EE07D2A156E6500172D0A /* AppLabel.swift */,
 				822EE07F2A156ED100172D0A /* AppTextfield.swift */,
 				822EE0832A1577F000172D0A /* BaseViewController.swift */,
+				822EE0A52A18238B00172D0A /* AvatarImageView.swift */,
 			);
 			path = Reusables;
 			sourceTree = "<group>";
@@ -124,6 +139,8 @@
 			children = (
 				822EE0642A1568C200172D0A /* UIFont + Extension.swift */,
 				822EE0662A15690000172D0A /* UIColor + Extension.swift */,
+				822EE0902A15873300172D0A /* UIViewController + Extension.swift */,
+				822EE0AA2A182FAD00172D0A /* UITabBar + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -143,13 +160,16 @@
 		822EE07B2A156D5A00172D0A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				822EE0A72A18297A00172D0A /* Cell */,
+				822EE08D2A157E9100172D0A /* TabBar */,
 				822EE07C2A156D6900172D0A /* Storyboards */,
 				822EE04F2A15670000172D0A /* LoginViewController.swift */,
-				822EE0812A1577C900172D0A /* BaseTabBarViewController.swift */,
 				822EE0852A1578F400172D0A /* HomeViewController.swift */,
 				822EE0872A15791600172D0A /* ChatViewController.swift */,
 				822EE0892A15792900172D0A /* CameraViewController.swift */,
 				822EE08B2A15793F00172D0A /* SettingsViewController.swift */,
+				822EE08E2A15844D00172D0A /* NewChatViewController.swift */,
+				822EE0952A15953300172D0A /* MessagingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -161,6 +181,22 @@
 				822EE0562A15670200172D0A /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		822EE08D2A157E9100172D0A /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				822EE0812A1577C900172D0A /* BaseTabBarViewController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		822EE0A72A18297A00172D0A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				822EE0A82A18299000172D0A /* ChatsTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +215,9 @@
 			dependencies = (
 			);
 			name = TestChatApp;
+			packageProductDependencies = (
+				822EE0932A1590F600172D0A /* IQKeyboardManagerSwift */,
+			);
 			productName = TestChatApp;
 			productReference = 822EE0482A15670000172D0A /* TestChatApp.app */;
 			productType = "com.apple.product-type.application";
@@ -207,6 +246,9 @@
 				Base,
 			);
 			mainGroup = 822EE03F2A15670000172D0A;
+			packageReferences = (
+				822EE0922A1590F600172D0A /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			productRefGroup = 822EE0492A15670000172D0A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -243,13 +285,19 @@
 				822EE0502A15670000172D0A /* LoginViewController.swift in Sources */,
 				822EE04C2A15670000172D0A /* AppDelegate.swift in Sources */,
 				822EE07E2A156E6500172D0A /* AppLabel.swift in Sources */,
+				822EE08F2A15844D00172D0A /* NewChatViewController.swift in Sources */,
 				822EE08A2A15792900172D0A /* CameraViewController.swift in Sources */,
 				822EE0672A15690000172D0A /* UIColor + Extension.swift in Sources */,
 				822EE0842A1577F000172D0A /* BaseViewController.swift in Sources */,
 				822EE04E2A15670000172D0A /* SceneDelegate.swift in Sources */,
+				822EE0A62A18238B00172D0A /* AvatarImageView.swift in Sources */,
 				822EE0862A1578F400172D0A /* HomeViewController.swift in Sources */,
+				822EE0AB2A182FAD00172D0A /* UITabBar + Extension.swift in Sources */,
+				822EE0962A15953300172D0A /* MessagingViewController.swift in Sources */,
+				822EE0912A15873300172D0A /* UIViewController + Extension.swift in Sources */,
 				822EE08C2A15793F00172D0A /* SettingsViewController.swift in Sources */,
 				822EE0622A15687000172D0A /* AppButton.swift in Sources */,
+				822EE0A92A18299000172D0A /* ChatsTableViewCell.swift in Sources */,
 				822EE0802A156ED100172D0A /* AppTextfield.swift in Sources */,
 				822EE0882A15791600172D0A /* ChatViewController.swift in Sources */,
 				822EE0822A1577C900172D0A /* BaseTabBarViewController.swift in Sources */,
@@ -470,6 +518,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		822EE0922A1590F600172D0A /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = exactVersion;
+				version = 6.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		822EE0932A1590F600172D0A /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 822EE0922A1590F600172D0A /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 822EE0402A15670000172D0A /* Project object */;
 }
