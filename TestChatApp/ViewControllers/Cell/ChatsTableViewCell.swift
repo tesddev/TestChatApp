@@ -9,7 +9,7 @@ import UIKit
 
 class ChatsTableViewCell: UITableViewCell {
     
-    static let identifier = "AccountSettingsTableViewCell"
+    static let identifier = "ChatsTableViewCell"
     
     var nameLabel: UILabel = {
         let label = AppLabel()
