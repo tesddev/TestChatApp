@@ -11,7 +11,7 @@ class LoginViewController: BaseViewController {
     
     var loginLabel: AppLabel = {
         let label = AppLabel()
-        label.text = "Login "
+        label.text = "Login"
         return label
     }()
     
@@ -80,9 +80,7 @@ class LoginViewController: BaseViewController {
     }
     
     @objc func didTapLoginButton(){
-        print("pressed")
         let vc = BaseTabBarViewController()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
