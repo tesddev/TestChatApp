@@ -8,71 +8,145 @@
 import UIKit
 
 class HomeTableViewCell: UITableViewCell {
+    var noThumbnail = NSLayoutConstraint()
+    var yesThumbnail = NSLayoutConstraint()
     
     static let identifier = "HomeTableViewCell"
+    
+    let avatar: AvatarImageView = {
+        let image = AvatarImageView(frame: CGRect())
+        image.image = UIImage(named: "feedAvatar")
+        image.layer.cornerRadius = 10
+        return image
+    }()
     
     var nameLabel: UILabel = {
         let label = AppLabel()
         label.font = UIFont().useInterFont(ofSize: 18, weight: .medium)
-        label.text = "Smith Mathew"
+        label.text = "Cynthia Kulmax"
         return label
     }()
     
-    var messageLabel: AppLabel = {
+    var usernameLabel: UILabel = {
         let label = AppLabel()
-        label.font = UIFont().useInterFont(ofSize: 16, weight: .regular)
-        label.text = "Hi, David. Hope you’re doing...."
-        label.textColor = UIColor(hexString: "#9C9797")
+        label.font = UIFont().useInterFont(ofSize: 11, weight: .medium)
+        label.textColor = UIColor(hexString: "#707070")
+        label.text = "@quenme"
         return label
     }()
     
-    var dateLabel: AppLabel = {
+    var locationLabel: UILabel = {
+        let label = AppLabel()
+        label.font = UIFont().useInterFont(ofSize: 11, weight: .medium)
+        label.text = "Lagos, Nigeria"
+        label.textColor = UIColor(hexString: "#707070")
+        return label
+    }()
+    
+    var timeStampLabel: UILabel = {
+        let label = AppLabel()
+        label.font = UIFont().useInterFont(ofSize: 11, weight: .medium)
+        label.text = "2m ago"
+        label.textColor = UIColor(hexString: "#707070")
+        return label
+    }()
+    
+    var descriptionLabel: AppLabel = {
         let label = AppLabel()
         label.font = UIFont().useInterFont(ofSize: 14, weight: .regular)
-        label.text = "29 mar"
-        label.textColor = UIColor(hexString: "#C5BDBD")
+        label.text = "Hi, David. Hope you’re doing...."
+        label.numberOfLines = 10
         return label
     }()
     
-    let avatar: AvatarImageView = {
+    let thumbnailImageView: AvatarImageView = {
         let image = AvatarImageView(frame: CGRect())
+        image.image = UIImage(named: "imageThumbnail")
         return image
     }()
     
+    let engagementImageView: AvatarImageView = {
+        let image = AvatarImageView(frame: CGRect())
+        image.image = UIImage(named: "interaction")
+        return image
+    }()
+    
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(messageLabel)
         contentView.addSubview(avatar)
-        contentView.addSubview(dateLabel)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(usernameLabel)
+        contentView.addSubview(locationLabel)
+        contentView.addSubview(timeStampLabel)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(thumbnailImageView)
+        contentView.addSubview(engagementImageView)
         setUpViews()
     }
     
-    func configureWith(model: ChatsTableViewCellModel){
+    func configureWith(model: HomeTableViewCellModel){
         self.selectionStyle = .none
-        self.nameLabel.text = model.name
-        self.dateLabel.text = model.date
-        self.messageLabel.text = model.message
-        self.avatar.image = UIImage(named: model.imageString)
+        if model.noMedia {
+            yesThumbnail.isActive = false
+            noThumbnail.isActive = true
+            thumbnailImageView.isHidden = true
+        } else {
+            noThumbnail.isActive = false
+            yesThumbnail.isActive = true
+            thumbnailImageView.isHidden = false
+            if model.video {
+                print("show video")
+                thumbnailImageView.image = UIImage(named: "videoThumbnail")
+            } else {
+                print("show image")
+                thumbnailImageView.image = UIImage(named: "imageThumbnail")
+            }
+        }
+        self.nameLabel.text = model.username
+        self.usernameLabel.text = model.username
+        self.descriptionLabel.text = model.description
     }
     
     func setUpViews() {
         NSLayoutConstraint.activate([
-            avatar.heightAnchor.constraint(equalToConstant: 50),
-            avatar.widthAnchor.constraint(equalToConstant: 50),
+            avatar.heightAnchor.constraint(equalToConstant: 42),
+            avatar.widthAnchor.constraint(equalToConstant: 42),
             avatar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            avatar.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            avatar.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             
-            nameLabel.topAnchor.constraint(equalTo: avatar.topAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 23),
+            nameLabel.topAnchor.constraint(equalTo: avatar.topAnchor, constant: 2),
+            nameLabel.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 12),
             
-            messageLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            messageLabel.bottomAnchor.constraint(equalTo: avatar.bottomAnchor),
+            usernameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4),
+            usernameLabel.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 12),
             
-            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            dateLabel.topAnchor.constraint(equalTo: nameLabel.topAnchor),
+            locationLabel.topAnchor.constraint(equalTo: usernameLabel.topAnchor),
+            locationLabel.leadingAnchor.constraint(equalTo: usernameLabel.trailingAnchor, constant: 16),
             
+            timeStampLabel.topAnchor.constraint(equalTo: usernameLabel.topAnchor),
+            timeStampLabel.leadingAnchor.constraint(equalTo: locationLabel.trailingAnchor, constant: 16),
+            
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            descriptionLabel.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: 16),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            thumbnailImageView.heightAnchor.constraint(equalToConstant: 238),
+            thumbnailImageView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 12),
+            thumbnailImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            thumbnailImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            
+            engagementImageView.heightAnchor.constraint(equalToConstant: 24),
+            engagementImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            engagementImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            engagementImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
         ])
+        
+        noThumbnail = engagementImageView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 12)
+        yesThumbnail = engagementImageView.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 12)
+
+        yesThumbnail.isActive = true
         
     }
     
@@ -83,5 +157,6 @@ class HomeTableViewCell: UITableViewCell {
 }
 
 struct HomeTableViewCellModel {
-    let name, message, date, imageString: String
+    let description, link, id, thumbnail, userID, username: String
+    let noMedia, video: Bool
 }
