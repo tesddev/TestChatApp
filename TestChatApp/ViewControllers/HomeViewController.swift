@@ -9,9 +9,10 @@ import UIKit
 
 class HomeViewController: BaseViewController {
     
-    var model: [ChatsTableViewCellModel] = [
-        ChatsTableViewCellModel.init(name: "Smith Mathew", message: "Hi, David. Hope you’re doing....", date: "29 mar", imageString: "avatar"),
-        ChatsTableViewCellModel.init(name: "Mary Ann", message: "Are you ready for today’s part..", date: "29 mar", imageString: "avatar"),
+    var model: [HomeTableViewCellModel] = [
+        HomeTableViewCellModel.init(description: "I was at Kaduna state yesterday after a stressful week just to relax and nature was very awesome. Getting to see these things...more", link: "", id: "", thumbnail: "", userID: "", username: "@quenme", noMedia: true, video: false),
+        HomeTableViewCellModel.init(description: "I was at Kaduna state yesterday after a stressful week just to relax and nature was very awesome. Getting to see these things...more", link: "", id: "", thumbnail: "", userID: "", username: "@quenme12", noMedia: false, video: false),
+        HomeTableViewCellModel.init(description: "Have seemless transaction using qwid (www.qwid.io).", link: "", id: "", thumbnail: "", userID: "", username: "@quenme34", noMedia: false, video: true),
     ]
     
     var headerLabel: AppLabel = {
@@ -33,6 +34,7 @@ class HomeViewController: BaseViewController {
         table.backgroundColor = .white
         table.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.identifier)
         table.translatesAutoresizingMaskIntoConstraints = false
+        table.showsVerticalScrollIndicator = false
         table.separatorStyle = .none
         return table
     }()
@@ -88,15 +90,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = MessagingViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
 }
