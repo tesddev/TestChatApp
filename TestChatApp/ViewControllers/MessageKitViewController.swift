@@ -59,7 +59,6 @@ class MessageKitViewController: MessagesViewController {
         messageInputBar.isHidden = true
         showMessageTimestampOnSwipeLeft = true
         populateMessageTray()
-//        print("see all messages \(messages)")
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
