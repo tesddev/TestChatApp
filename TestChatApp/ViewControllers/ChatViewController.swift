@@ -74,7 +74,8 @@ class ChatViewController: BaseViewController {
         let vc = NewChatViewController()
         vc.modalPresentationStyle = .overFullScreen
         vc.startChatCompletion = { [weak self] in
-            let vc = MessagingViewController()
+            let vc = MessageKitViewController()
+            vc.hidesBottomBarWhenPushed = true
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         present(vc, animated: true)
@@ -96,11 +97,12 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = MessagingViewController()
+        let vc = MessageKitViewController()
+        vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        60
+        90
     }
 }
