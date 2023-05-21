@@ -8,6 +8,7 @@
 import UIKit
 
 class NewChatViewController: BaseViewController {
+    var startChatCompletion: (()->Void)?
     
     private let parentView: UIView = {
         let view = UIView()
@@ -105,6 +106,8 @@ class NewChatViewController: BaseViewController {
     }
     
     @objc func didTapStartChatButton(){
-        
+        self.dismiss(animated: true) { [weak self] in
+            self?.startChatCompletion?()
+        }
     }
 }
