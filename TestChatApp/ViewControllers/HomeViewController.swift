@@ -6,14 +6,16 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class HomeViewController: BaseViewController {
     
-    var model: [HomeTableViewCellModel] = [
-        HomeTableViewCellModel.init(description: "I was at Kaduna state yesterday after a stressful week just to relax and nature was very awesome. Getting to see these things...more", link: "", id: "", thumbnail: "", userID: "", username: "@quenme", noMedia: true, video: false),
-        HomeTableViewCellModel.init(description: "I was at Kaduna state yesterday after a stressful week just to relax and nature was very awesome. Getting to see these things...more", link: "", id: "", thumbnail: "", userID: "", username: "@quenme12", noMedia: false, video: false),
-        HomeTableViewCellModel.init(description: "Have seemless transaction using qwid (www.qwid.io).", link: "", id: "", thumbnail: "", userID: "", username: "@quenme34", noMedia: false, video: true),
-    ]
+    var model = [PostResponseModel1]() {
+        didSet {
+            print("see model newly set \(model)")
+            self.contentTableView.reloadData()
+        }
+    }
     
     var headerLabel: AppLabel = {
         let label = AppLabel()
@@ -45,6 +47,10 @@ class HomeViewController: BaseViewController {
         activateConstraint()
         contentTableView.delegate = self
         contentTableView.dataSource = self
+        fetchPostsWithBool { model in
+            print("see all models \(model)")
+            self.model = model
+        }
     }
     
     private func activateConstraint() {
@@ -72,6 +78,48 @@ class HomeViewController: BaseViewController {
     @objc func didTapLoginButton(){
         let vc = BaseTabBarViewController()
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func fetchPosts(handler: @escaping ([PostResponseModel]) -> Void){
+        Firestore.firestore().collection("post").getDocuments { (snapshot, error) in
+            var theMessages: [PostResponseModel] = []
+            snapshot?.documents.forEach({ (document) in
+                let dictionary = document.data()
+                print("see the dict for posts \(dictionary)")
+                print(dictionary.printJsonFormatWith("the posts"))
+                    let decoder = JSONDecoder()
+                do {
+                    let data = try JSONSerialization.data(withJSONObject: document.data(), options: .prettyPrinted)
+                    let message = try decoder.decode(PostResponseModel.self, from: data)
+                    print("this is the message \(String(describing: message.description))")
+                    theMessages.append(message)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            })
+            handler(theMessages)
+        }
+    }
+    
+    func fetchPostsWithBool(handler: @escaping ([PostResponseModel1]) -> Void){
+        Firestore.firestore().collection("post").getDocuments { (snapshot, error) in
+            var theMessages: [PostResponseModel1] = []
+            snapshot?.documents.forEach({ (document) in
+                let dictionary = document.data()
+                print("see the dict for posts \(dictionary)")
+                print(dictionary.printJsonFormatWith("the posts"))
+                    let decoder = JSONDecoder()
+                do {
+                    let data = try JSONSerialization.data(withJSONObject: document.data(), options: .prettyPrinted)
+                    let message = try decoder.decode(PostResponseModel1.self, from: data)
+                    print("this is the message \(String(describing: message.description))")
+                    theMessages.append(message)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            })
+            handler(theMessages)
+        }
     }
 }
 
