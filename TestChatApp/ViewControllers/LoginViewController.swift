@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class LoginViewController: BaseViewController {
     
@@ -80,7 +81,62 @@ class LoginViewController: BaseViewController {
     }
     
     @objc func didTapLoginButton(){
-        let vc = BaseTabBarViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        addUser {
+            let vc = BaseTabBarViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func randomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
+    /// Permission needs to be updated to allow me write to this collection or be given the correct collection reference to do so.
+    func addUser(completion: @escaping () -> Void){
+        print("text \(usernameTextField.text)")
+        guard let username = usernameTextField.text?.trimmingCharacters(in: .whitespaces) else {
+            return
+        }
+        if username == "" {
+            print("no name in field yet")
+            let alert = UIAlertController(title: "Alert", message: "Please input a username first!", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        } else {
+            // Write Data to Firestore
+            let collection = Firestore.firestore().collection("users")
+            let user = UserModel(
+                userId: "JfpBYheu4zLhNMv539OR",
+                name: "Brooklyn Simmons",
+                bio: "Always curious to learn new stuffs",
+                username: username,
+                photo: "https://firebasestorage.googleapis.com/v0/b/blynq-13e9a.appspot.com/o/default_user_img.png?alt=media&token=8190d4c3-8a93-4476-a37b-bc3faa74e71d"
+            )
+            print(user.dictionary)
+            DispatchQueue.main.async {
+                collection.addDocument(data: user.dictionary) { err in
+                    print("see err \(String(describing: err))")
+                    let alert = UIAlertController(title: "Alert", message: err?.localizedDescription, preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: {(alert: UIAlertAction!) in
+                        print("okay pressed")
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                completion()
+            }
+            
+        }
+    }
+    
+    func fetchAllUsers() {
+        Firestore.firestore().collection("users").getDocuments { (snapshot, error) in
+            snapshot?.documents.forEach({ (document) in
+                let dictionary = document.data()
+                print("see the dict \(dictionary)")
+            })
+            print("error is \(String(describing: error))")
+        }
     }
 }
