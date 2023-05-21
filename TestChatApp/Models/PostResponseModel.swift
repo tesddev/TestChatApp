@@ -15,23 +15,6 @@ import Foundation
 
 import Foundation
 
-struct PostResponseModel: Codable {
-    let link: String?
-    let timestamp: Int
-    let description, id, video: String?
-    let noMedia: Bool
-    let userID: String
-    let thumbnail: String?
-    let username: String
-
-    enum CodingKeys: String, CodingKey {
-        case link, timestamp, description, id, video
-        case noMedia = "no_media"
-        case userID = "userId"
-        case thumbnail, username
-    }
-}
-
 struct PostResponseModel1: Codable {
     let link: String?
     let timestamp: Int
