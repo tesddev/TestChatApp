@@ -14,8 +14,6 @@ class AvatarImageView: UIImageView {
         translatesAutoresizingMaskIntoConstraints = false
         image = UIImage(named: "avatar")
         layer.cornerRadius = 25
-        contentMode = .scaleAspectFill
-        translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder: NSCoder) {

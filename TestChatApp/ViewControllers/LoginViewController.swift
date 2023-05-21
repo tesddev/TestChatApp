@@ -94,12 +94,10 @@ class LoginViewController: BaseViewController {
     
     /// Permission needs to be updated to allow me write to this collection or be given the correct collection reference to do so.
     func addUser(completion: @escaping () -> Void){
-        print("text \(usernameTextField.text)")
         guard let username = usernameTextField.text?.trimmingCharacters(in: .whitespaces) else {
             return
         }
         if username == "" {
-            print("no name in field yet")
             let alert = UIAlertController(title: "Alert", message: "Please input a username first!", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -134,9 +132,8 @@ class LoginViewController: BaseViewController {
         Firestore.firestore().collection("users").getDocuments { (snapshot, error) in
             snapshot?.documents.forEach({ (document) in
                 let dictionary = document.data()
-                print("see the dict \(dictionary)")
+//                print("see the dict \(dictionary)")
             })
-            print("error is \(String(describing: error))")
         }
     }
 }

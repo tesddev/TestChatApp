@@ -124,11 +124,9 @@ class HomeTableViewCell: UITableViewCell {
             let hasVideo = model.video ?? false
             let imageURL = URL(string: model.thumbnail ?? "https://firebasestorage.googleapis.com/v0/b/blinqpost.appspot.com/o/blinqpayapp_283378730_5263452000387376_8497039804548532757_n.jpg?alt=media&token=445db31e-533b-4feb-b2dc-a7b7950a8ae9")!
             if hasVideo {
-                print("show video")
                 let transformer = SDImageResizingTransformer(size: CGSize(width: contentView.viewWidth, height: 238), scaleMode: .aspectFill)
                 thumbnailImageView.sd_setImage(with: imageURL,  placeholderImage: UIImage(named: "videoThumbnail"), context: [.imageTransformer: transformer])
             } else {
-                print("show image")
                 let transformer = SDImageResizingTransformer(size: CGSize(width: contentView.viewWidth, height: 238), scaleMode: .aspectFill)
                 thumbnailImageView.sd_setImage(with: imageURL,  placeholderImage: UIImage(named: "imageThumbnail"), context: [.imageTransformer: transformer])
             }
@@ -202,7 +200,7 @@ class HomeTableViewCell: UITableViewCell {
     func convertTimeInterval(timeStamp: Int) -> String {
         let myTimeInterval = TimeInterval(timeStamp)
         let date = Date().addingTimeInterval(-myTimeInterval)
-        print("ago \(date.timeAgoDisplay())")
+//        print("ago \(date.timeAgoDisplay())")
         return date.timeAgo()
     }
     

@@ -17,7 +17,6 @@ extension Dictionary {
            let theJSONText = String(data: theJSONData,
                                     encoding: String.Encoding.ascii) {
             theString = theJSONText
-//            print("JSON string = \n\(theJSONText)")
         }
         return theString
     }
