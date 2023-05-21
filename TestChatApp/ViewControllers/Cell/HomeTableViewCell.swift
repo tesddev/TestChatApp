@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class HomeTableViewCell: UITableViewCell {
     var noThumbnail = NSLayoutConstraint()
@@ -110,7 +111,7 @@ class HomeTableViewCell: UITableViewCell {
         setUpViews()
     }
     
-    func configureWith(model: HomeTableViewCellModel){
+    func configureWith(model: PostResponseModel1){
         self.selectionStyle = .none
         if model.noMedia {
             yesThumbnail.isActive = false
@@ -120,17 +121,22 @@ class HomeTableViewCell: UITableViewCell {
             noThumbnail.isActive = false
             yesThumbnail.isActive = true
             thumbnailImageView.isHidden = false
-            if model.video {
+            let hasVideo = model.video ?? false
+            let imageURL = URL(string: model.thumbnail ?? "https://firebasestorage.googleapis.com/v0/b/blinqpost.appspot.com/o/blinqpayapp_283378730_5263452000387376_8497039804548532757_n.jpg?alt=media&token=445db31e-533b-4feb-b2dc-a7b7950a8ae9")!
+            if hasVideo {
                 print("show video")
-                thumbnailImageView.image = UIImage(named: "videoThumbnail")
+                let transformer = SDImageResizingTransformer(size: CGSize(width: contentView.viewWidth, height: 238), scaleMode: .aspectFill)
+                thumbnailImageView.sd_setImage(with: imageURL,  placeholderImage: UIImage(named: "videoThumbnail"), context: [.imageTransformer: transformer])
             } else {
                 print("show image")
-                thumbnailImageView.image = UIImage(named: "imageThumbnail")
+                let transformer = SDImageResizingTransformer(size: CGSize(width: contentView.viewWidth, height: 238), scaleMode: .aspectFill)
+                thumbnailImageView.sd_setImage(with: imageURL,  placeholderImage: UIImage(named: "imageThumbnail"), context: [.imageTransformer: transformer])
             }
         }
-//        self.nameLabel.text = model.username
         self.usernameLabel.text = model.username
         self.descriptionLabel.text = model.description
+        self.timeStampLabel.text = convertTimeInterval(timeStamp: model.timestamp)
+        self.nameLabel.text = model.username
     }
     
     func setUpViews() {
@@ -191,6 +197,13 @@ class HomeTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func convertTimeInterval(timeStamp: Int) -> String {
+        let myTimeInterval = TimeInterval(timeStamp)
+        let date = Date().addingTimeInterval(-myTimeInterval)
+        print("ago \(date.timeAgoDisplay())")
+        return date.timeAgo()
     }
     
 }
