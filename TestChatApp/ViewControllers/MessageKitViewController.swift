@@ -7,8 +7,11 @@
 
 import UIKit
 import MessageKit
+import FirebaseFirestore
+import RealmSwift
 
 class MessageKitViewController: MessagesViewController {
+    // MARK: - MessageKit variables
     let currentUser = Sender(senderId: "avatar", displayName: "Tes")
     let otherUser = Sender(senderId: "other", displayName: "Sally")
     var messages: [Message] = [] {
@@ -17,8 +20,37 @@ class MessageKitViewController: MessagesViewController {
         }
     }
     
+    
+    // MARK: - Firestore variables
+    let backgroundView = UIImageView()
+    
+    private var listener: ListenerRegistration?
+    
+    private var fireStoreMessages: [MessageModel] = [] {
+        didSet {
+            /// update realm which inturn update message
+        }
+    }
+    private var documents: [DocumentSnapshot] = []
+    
+    fileprivate var query = Query.self {
+      didSet {
+        if let listener = listener {
+          listener.remove()
+          observeQuery()
+        }
+      }
+    }
+    
+    // MARK: - Realm variables
+    let realm = try! Realm()
+    let results = try! Realm().objects(RealmMessages.self)
+    var notificationToken: NotificationToken!
+    
+    // MARK: - ViewController properties
     var avatar: AvatarImageView = {
         let imageView = AvatarImageView(frame: .zero)
+        imageView.image = UIImage(named: "other")
         return imageView
     }()
     
@@ -62,10 +94,71 @@ class MessageKitViewController: MessagesViewController {
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        
+        /// Set up notification
+        notificationToken = results.observe { (changes: RealmCollectionChange) in
+            switch changes {
+            case .initial:
+                self.messagesCollectionView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                // Always apply updates in the following order: deletions, insertions, then modifications.
+                // Handling insertions before deletions may result in unexpected behavior.
+                self.messagesCollectionView.reloadData()
+            case .error(let err):
+                fatalError("\(err)")
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.setTabBarHidden(true, animated: true)
+        observeQuery()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+      super.viewWillDisappear(animated)
+      stopObserving()
+    }
+    
+    fileprivate func stopObserving() {
+      listener?.remove()
+    }
+    
+    fileprivate func observeQuery() {
+//      guard let query = query else { return }
+      stopObserving()
+
+      // Fetch message from Firestore
+        /// code is commented here because I have not found a way of solving the issue of Query Class being used by both Firestore and Realm
+        /// But below is the process of setting listner for Firestore
+        
+//        listener = query.addSnapshotListener { [unowned self] (snapshot, error) in
+//          guard let snapshot = snapshot else {
+//            print("Error fetching snapshot results: \(error!)")
+//            return
+//          }
+//            var theMessages: [MessageModel] = []
+//            snapshot.documents.forEach({ (document) in
+//                let dictionary = document.data()
+//                    let decoder = JSONDecoder()
+//                do {
+//                    let data = try JSONSerialization.data(withJSONObject: document.data(), options: .prettyPrinted)
+//                    let message = try decoder.decode(MessageModel.self, from: data)
+//                    theMessages.append(message)
+//                } catch {
+//                    print(error.localizedDescription)
+//                }
+//            })
+//          self.fireStoreMessages = theMessages
+//          self.documents = snapshot.documents
+//          /// I can save to realm right here and realm lisstner does the rest of the job including reloading data
+//
+//          if self.documents.count > 0 {
+//              messagesCollectionView.reloadData()
+//          } else {
+//            self.messagesCollectionView.backgroundView = self.backgroundView
+//          }
+//        }
     }
     
     func populateMessageTray() {
@@ -195,4 +288,12 @@ struct Media: MediaItem {
     var image: UIImage?
     var placeholderImage: UIImage
     var size: CGSize
+}
+
+
+// Define the dog class.
+class RealmMessages: Object {
+    @Persisted var text = ""
+    @Persisted var id = 0
+    @Persisted var timestamp: Int?
 }
