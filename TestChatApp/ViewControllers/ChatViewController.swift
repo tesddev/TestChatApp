@@ -11,7 +11,7 @@ class ChatViewController: BaseViewController {
     
     var model: [ChatsTableViewCellModel] = [
         ChatsTableViewCellModel.init(name: "Smith Mathew", message: "Hi, David. Hope you’re doing....", date: "29 mar", imageString: "avatar"),
-        ChatsTableViewCellModel.init(name: "Mary Ann", message: "Are you ready for today’s part..", date: "29 mar", imageString: "avatar"),
+        ChatsTableViewCellModel.init(name: "Mary Ann", message: "Are you ready for today’s part..", date: "29 mar", imageString: "other"),
     ]
     
     var headerLabel: AppLabel = {
