@@ -73,9 +73,10 @@ class ChatViewController: BaseViewController {
     @objc func didTapLoginButton(){
         let vc = NewChatViewController()
         vc.modalPresentationStyle = .overFullScreen
-        vc.startChatCompletion = { [weak self] in
+        vc.startChatCompletion = { [weak self] name in
             let vc = MessageKitViewController()
             vc.hidesBottomBarWhenPushed = true
+            vc.nameLabel.text = name.uppercased()
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         present(vc, animated: true)
