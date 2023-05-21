@@ -35,6 +35,13 @@ class HomeTableViewCell: UITableViewCell {
         return label
     }()
     
+    let elipse: AvatarImageView = {
+        let image = AvatarImageView(frame: CGRect())
+        image.image = UIImage(named: "ellipse")
+        image.layer.cornerRadius = 2
+        return image
+    }()
+    
     var locationLabel: UILabel = {
         let label = AppLabel()
         label.font = UIFont().useInterFont(ofSize: 11, weight: .medium)
@@ -43,12 +50,26 @@ class HomeTableViewCell: UITableViewCell {
         return label
     }()
     
+    let elipse1: AvatarImageView = {
+        let image = AvatarImageView(frame: CGRect())
+        image.image = UIImage(named: "ellipse")
+        image.layer.cornerRadius = 2
+        return image
+    }()
+    
     var timeStampLabel: UILabel = {
         let label = AppLabel()
         label.font = UIFont().useInterFont(ofSize: 11, weight: .medium)
         label.text = "2m ago"
         label.textColor = UIColor(hexString: "#707070")
         return label
+    }()
+    
+    let optionImage: AvatarImageView = {
+        let image = AvatarImageView(frame: CGRect())
+        image.image = UIImage(named: "elipseGroup")
+        image.layer.cornerRadius = 0
+        return image
     }()
     
     var descriptionLabel: AppLabel = {
@@ -78,8 +99,11 @@ class HomeTableViewCell: UITableViewCell {
         contentView.addSubview(avatar)
         contentView.addSubview(nameLabel)
         contentView.addSubview(usernameLabel)
+        contentView.addSubview(elipse)
         contentView.addSubview(locationLabel)
+        contentView.addSubview(elipse1)
         contentView.addSubview(timeStampLabel)
+        contentView.addSubview(optionImage)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(thumbnailImageView)
         contentView.addSubview(engagementImageView)
@@ -104,7 +128,7 @@ class HomeTableViewCell: UITableViewCell {
                 thumbnailImageView.image = UIImage(named: "imageThumbnail")
             }
         }
-        self.nameLabel.text = model.username
+//        self.nameLabel.text = model.username
         self.usernameLabel.text = model.username
         self.descriptionLabel.text = model.description
     }
@@ -120,13 +144,28 @@ class HomeTableViewCell: UITableViewCell {
             nameLabel.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 12),
             
             usernameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4),
-            usernameLabel.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 12),
+            usernameLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            
+            elipse.heightAnchor.constraint(equalToConstant: 4),
+            elipse.widthAnchor.constraint(equalToConstant: 4),
+            elipse.leadingAnchor.constraint(equalTo: usernameLabel.trailingAnchor, constant: 6),
+            elipse.centerYAnchor.constraint(equalTo: usernameLabel.centerYAnchor),
             
             locationLabel.topAnchor.constraint(equalTo: usernameLabel.topAnchor),
             locationLabel.leadingAnchor.constraint(equalTo: usernameLabel.trailingAnchor, constant: 16),
             
+            elipse1.heightAnchor.constraint(equalToConstant: 4),
+            elipse1.widthAnchor.constraint(equalToConstant: 4),
+            elipse1.leadingAnchor.constraint(equalTo: locationLabel.trailingAnchor, constant: 6),
+            elipse1.centerYAnchor.constraint(equalTo: usernameLabel.centerYAnchor),
+            
             timeStampLabel.topAnchor.constraint(equalTo: usernameLabel.topAnchor),
             timeStampLabel.leadingAnchor.constraint(equalTo: locationLabel.trailingAnchor, constant: 16),
+            
+            optionImage.heightAnchor.constraint(equalToConstant: 18),
+            optionImage.widthAnchor.constraint(equalToConstant: 4.13),
+            optionImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            optionImage.centerYAnchor.constraint(equalTo: avatar.centerYAnchor),
             
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             descriptionLabel.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: 16),
