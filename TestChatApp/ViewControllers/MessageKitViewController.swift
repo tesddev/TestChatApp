@@ -54,6 +54,7 @@ class MessageKitViewController: MessagesViewController {
         activateConstraint()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.tabBarController?.setTabBarHidden(true, animated: true)
+        self.inputContainerView.removeFromSuperview()
         setupNavigationBarItems()
         messageInputBar.isHidden = true
         showMessageTimestampOnSwipeLeft = true
@@ -62,6 +63,10 @@ class MessageKitViewController: MessagesViewController {
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.setTabBarHidden(true, animated: true)
     }
     
     func populateMessageTray() {
@@ -94,7 +99,7 @@ class MessageKitViewController: MessagesViewController {
     }
     
     func setupNavigationBarItems(){
-        avatar.frame = CGRect(x: 0, y: 0, width: 45, height: 45)
+        avatar.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         nameLabel.frame = CGRect(x: 0, y: 0, width: 170, height: 27)
         
         navigationItem.leftBarButtonItems = [
@@ -111,7 +116,7 @@ class MessageKitViewController: MessagesViewController {
         view.addSubview(sendButton)
                 
         NSLayoutConstraint.activate([
-            messageTextField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -22),
+            messageTextField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -1),
             messageTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
             messageTextField.heightAnchor.constraint(equalToConstant: 50),
             messageTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -74),
