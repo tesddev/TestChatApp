@@ -9,7 +9,7 @@ import UIKit
 import MessageKit
 
 class MessageKitViewController: MessagesViewController {
-    let currentUser = Sender(senderId: "self", displayName: "Tes")
+    let currentUser = Sender(senderId: "avatar", displayName: "Tes")
     let otherUser = Sender(senderId: "other", displayName: "Sally")
     var messages: [Message] = [] {
         didSet {
@@ -160,6 +160,18 @@ extension MessageKitViewController: MessagesDataSource {
 
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         return messages[indexPath.section]
+    }
+    
+    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+//        let sigil = Sigil(ship: Sigil.Ship(rawValue: message.sender.senderId)!, color: .black).image(with: CGSize(width: 24.0, height: 24.0))
+        let avatar = Avatar(image: UIImage(named: message.sender.senderId), initials: "")
+            avatarView.set(avatar: avatar)
+            avatarView.isHidden = isNextMessageSameSender(at: indexPath)
+    }
+
+    func isNextMessageSameSender(at indexPath: IndexPath) -> Bool {
+        guard indexPath.section + 1 < messages.count else { return false }
+        return messages[indexPath.section].sender.displayName == messages[indexPath.section + 1].sender.displayName
     }
 }
 
