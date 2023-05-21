@@ -78,24 +78,6 @@ class HomeViewController: BaseViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func fetchPosts(handler: @escaping ([PostResponseModel]) -> Void){
-        Firestore.firestore().collection("post").getDocuments { (snapshot, error) in
-            var theMessages: [PostResponseModel] = []
-            snapshot?.documents.forEach({ (document) in
-                let dictionary = document.data()
-                    let decoder = JSONDecoder()
-                do {
-                    let data = try JSONSerialization.data(withJSONObject: document.data(), options: .prettyPrinted)
-                    let message = try decoder.decode(PostResponseModel.self, from: data)
-                    theMessages.append(message)
-                } catch {
-                    print(error.localizedDescription)
-                }
-            })
-            handler(theMessages)
-        }
-    }
-    
     func fetchPostsWithBool(handler: @escaping ([PostResponseModel1]) -> Void){
         Firestore.firestore().collection("post").getDocuments { (snapshot, error) in
             var theMessages: [PostResponseModel1] = []
